@@ -7,7 +7,7 @@ pub fn read_all_lines(file:&str) -> io::Result<Vec<String>> {
     reader.lines().collect()
 }
 
-fn get_cnfig_qujian(config:&Result<Vec<String>,io::Error>, path:&str) -> (usize, usize){
+fn get_config_qujian(config:&Result<Vec<String>,io::Error>, path:&str) -> (usize, usize){
     let mut  config_qujian:(usize, usize) = (0, 0);
     let path_vec:Vec<&str> = path.split(".").collect();
     let mut start: usize = 0;
@@ -46,7 +46,7 @@ fn get_cnfig_qujian(config:&Result<Vec<String>,io::Error>, path:&str) -> (usize,
     config_qujian
 } 
 
-fn get_cnfig_lines(config:&Result<Vec<String>,io::Error>, qujian:(usize,usize)) -> Vec<String> {
+fn get_config_lines(config:&Result<Vec<String>,io::Error>, qujian:(usize,usize)) -> Vec<String> {
     let mut line_vec:Vec<String> = Vec::new();
     let mut start:usize = 0;
     let mut started = true;
@@ -87,7 +87,7 @@ fn get_cnfig_lines(config:&Result<Vec<String>,io::Error>, qujian:(usize,usize)) 
 
 fn get_all_lines(config:&Result<Vec<String>,io::Error>,path:&str) -> Vec<String> {
     let mut line_vec:Vec<String> = Vec::new();
-    let qujian = get_cnfig_qujian(config, path);
+    let qujian = get_config_qujian(config, path);
     match config {
         Ok(lines) => {
             for line in &lines[qujian.0 .. qujian.1] {
@@ -102,9 +102,9 @@ fn get_all_lines(config:&Result<Vec<String>,io::Error>,path:&str) -> Vec<String>
 }
 
 //获取string，默认返回空字符串，表示错误
-pub fn get_cnfig_string(config:&Result<Vec<String>,io::Error>, path:&str, key:&str) -> String{
-    let qujian = get_cnfig_qujian(config, path);
-    let config_vec = get_cnfig_lines(config, qujian);
+pub fn get_config_string(config:&Result<Vec<String>,io::Error>, path:&str, key:&str) -> String{
+    let qujian = get_config_qujian(config, path);
+    let config_vec = get_config_lines(config, qujian);
     let mut ret = String::new();
     for line in config_vec {
         if line.contains(key) {
@@ -130,8 +130,8 @@ pub fn get_cnfig_string(config:&Result<Vec<String>,io::Error>, path:&str, key:&s
 
 //获取bool，默认返回false
 pub fn get_config_bool(config:&Result<Vec<String>,io::Error>, path:&str, key:&str) -> bool{
-    let qujian = get_cnfig_qujian(config, path);
-    let config_vec = get_cnfig_lines(config, qujian);
+    let qujian = get_config_qujian(config, path);
+    let config_vec = get_config_lines(config, qujian);
     let mut ret = false;
     for line in config_vec {
         if line.contains(key) {
@@ -157,9 +157,9 @@ pub fn get_config_bool(config:&Result<Vec<String>,io::Error>, path:&str, key:&st
 }
 
 //获取int，返回00001122185323表示错误
-pub fn get_cnfig_int(config:&Result<Vec<String>,io::Error>, path:&str, key:&str) -> i32{
-    let qujian = get_cnfig_qujian(config, path);
-    let config_vec = get_cnfig_lines(config, qujian);
+pub fn get_config_int(config:&Result<Vec<String>,io::Error>, path:&str, key:&str) -> i32{
+    let qujian = get_config_qujian(config, path);
+    let config_vec = get_config_lines(config, qujian);
     let mut ret:i32 = 00001122185323;
     for line in config_vec {
         if line.contains(key) {
@@ -186,8 +186,8 @@ pub fn get_cnfig_int(config:&Result<Vec<String>,io::Error>, path:&str, key:&str)
 //判断是否存在key
 pub fn contains_key(config:&Result<Vec<String>,io::Error>, path:&str , key:&str) -> bool {
     let mut ret = false;
-    let qujian = get_cnfig_qujian(config, path);
-    let config_vec = get_cnfig_lines(config, qujian);
+    let qujian = get_config_qujian(config, path);
+    let config_vec = get_config_lines(config, qujian);
     for line in config_vec {
         if line.contains("=") {
             let a = line.find("=");
