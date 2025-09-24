@@ -35,6 +35,7 @@ fn get_config_qujian(config:&Result<Vec<String>,io::Error>, path:&str) -> (usize
                 if line.contains("}") && !started{
                     if start < line.len() && &line[start..start+1] == "}" {
                             config_qujian.1 = i;
+                            break;
                     }
                 }
             }

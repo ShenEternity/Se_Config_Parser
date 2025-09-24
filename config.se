@@ -4,7 +4,7 @@
 
     [Eternity]
     {
-        Gover = perf
+        Gover = "perf"
         endle = true
 
         [Hello]
@@ -13,4 +13,21 @@
         }
     }
     Freq2 = 1020
+}
+
+[eee]
+{
+    Freq = 100
+
+    [Eternity]
+    {
+        Gover = "prf"
+        endle = false
+
+        [Hello]
+        {
+            qq = 1122
+        }
+    }
+    Freq2 = 10333
 }
