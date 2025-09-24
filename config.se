@@ -1,0 +1,16 @@
+[Shen]
+{
+    Freq = 10000
+
+    [Eternity]
+    {
+        Gover = perf
+        endle = true
+
+        [Hello]
+        {
+            qq = 111
+        }
+    }
+    Freq2 = 1020
+}

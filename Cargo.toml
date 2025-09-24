@@ -1,0 +1,9 @@
+[package]
+name = "se_config_parser"
+version = "0.1.0"
+edition = "2024"
+[dependencies]
+
+[lib]
+name = "se_config_parser"
+path = "src/lib.rs"
