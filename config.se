@@ -1,33 +1,13 @@
 [Shen]
 {
-    Freq = 10000
-
+    Gover = "power"
+    age = 1111
+    endle = false
     [Eternity]
     {
         Gover = "perf"
         endle = true
+        age = 2222
 
-        [Hello]
-        {
-            qq = 111
-        }
     }
-    Freq2 = 1020
-}
-
-[eee]
-{
-    Freq = 100
-
-    [Eternity]
-    {
-        Gover = "prf"
-        endle = false
-
-        [Hello]
-        {
-            qq = 1122
-        }
-    }
-    Freq2 = 10333
 }

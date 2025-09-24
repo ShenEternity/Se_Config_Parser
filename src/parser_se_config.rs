@@ -10,38 +10,46 @@ pub fn read_all_lines(file:&str) -> io::Result<Vec<String>> {
 fn get_config_qujian(config:&Result<Vec<String>,io::Error>, path:&str) -> (usize, usize){
     let mut  config_qujian:(usize, usize) = (0, 0);
     let path_vec:Vec<&str> = path.split(".").collect();
-    let mut start: usize = 0;
-    let mut started = false;
+    let path_len = path_vec.len();
+    let mut current_path_index = 0;
+    let mut start = 0;
+    let mut stated = false;
+    let mut startedd = false;
     match config {
         Ok(lines) => {
             for (i, line) in lines.iter().enumerate() {
-                if line.contains("[") && !started {
+                if line.contains("[") && !stated {
                     let a = line.find("[");
                     let b = line.find("]");
                     if let (Some(start), Some(end)) = (a, b) {
-                        if &&line[start+1..end] == path_vec.last().unwrap() {
-                            started = true;
+                        if line[start + 1..end].trim() == path_vec[current_path_index].trim() {
+                            if current_path_index == path_len - 1 {
+                                stated = true;
+                            }
+                            current_path_index += 1;
                         }
                     }
                 }
-                if started {
+                if stated && !startedd {
                     if line.contains("{") {
                         start = line.find("{").unwrap();
                         config_qujian.0 = i + 1;
-                        started = false;
+                        startedd = true;
                     }
-                   
                 }
-                if line.contains("}") && !started{
-                    if start < line.len() && &line[start..start+1] == "}" {
+                if startedd {
+                    if line.contains("}") {
+                        if line[start..start + 1].trim() == "}" {
                             config_qujian.1 = i;
                             break;
+                        }
                     }
+                    
                 }
-            }
+            } 
         }
         Err(err) => {
-            println!("{}",err);
+            println!("Error:{}",err);
         }
     }
     config_qujian
@@ -77,6 +85,7 @@ fn get_config_lines(config:&Result<Vec<String>,io::Error>, qujian:(usize,usize))
                 }
                 
                 line_vec.push(line.trim().to_string());
+
             }
         }
         Err(err) => {
