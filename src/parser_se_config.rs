@@ -166,11 +166,11 @@ pub fn get_config_bool(config:&Result<Vec<String>,io::Error>, path:&str, key:&st
     ret
 }
 
-//获取int，返回00001122185323表示错误
+//获取int，返回1122185323表示错误
 pub fn get_config_int(config:&Result<Vec<String>,io::Error>, path:&str, key:&str) -> i32{
     let qujian = get_config_qujian(config, path);
     let config_vec = get_config_lines(config, qujian);
-    let mut ret:i32 = 00001122185323;
+    let mut ret:i32 = 1122185323;
     for line in config_vec {
         if line.contains(key) {
             let a = line.find("=");
@@ -181,8 +181,8 @@ pub fn get_config_int(config:&Result<Vec<String>,io::Error>, path:&str, key:&str
                         ret = match b.parse::<i32>() {
                             Ok(num) => num,
                             Err(_) => {
-                                println!("{}不是int,返回:00001122185323表示错误", b);
-                                00001122185323
+                                println!("{}不是int,返回:1122185323表示错误", b);
+                                1122185323
                             }
                         }
                     }
